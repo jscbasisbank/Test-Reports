@@ -1,4 +1,4 @@
-name: Performance Automated Tests
+name: Automated Tests
 
 on:
   workflow_dispatch:
