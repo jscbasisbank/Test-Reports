@@ -1,6 +1,6 @@
 ---
 
-### 🕹️ Central Automation Control Panel
+🕹️ Central Automation Control Panel
 
 > ტესტების ხელით გასაშვებად აირჩიეთ სასურველი პროექტი შესაბამისი ბმულიდან:
 > 
