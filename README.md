@@ -1,0 +1,7 @@
+# 📊 Gatling Test Reports
+
+Below is the complete history of executed tests (in Tbilisi time). Simply click on any report to open it:
+
+---
+
+- 🚀 [Test Report (2026-07-30 14:09:16)](https://jscbasisbank.github.io/Test-Reports/gatling-reports/report-2026-07-30_14-09-16/index.html)
