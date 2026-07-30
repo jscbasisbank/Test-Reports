@@ -71,14 +71,16 @@ jobs:
                   https://raw.githubusercontent.com/jscbasisbank/Test-Reports/main/README.md \
                   | grep -oE "https://jscbasisbank.github.io/Test-Reports/gatling-reports/[^\)]+" | head -n 1)
                 
-                echo "===================================================="
-                echo " 🚀 GATLING TEST REPORT SUCCESSFULLY GENERATED!"
-                echo " Open HTML Report directly: $LATEST_LINK"
-                echo "===================================================="
+                # ვწერთ ლინკს GitHub Actions-ის Summary გვერდზე
+                echo "### 🚀 Gatling Test Report Generated!" >> $GITHUB_STEP_SUMMARY
+                echo "ტესტი წარმატებით დასრულდა. HTML რეპორტის სანახავად დააჭირეთ ქვემოთ მოცემულ ბმულს:" >> $GITHUB_STEP_SUMMARY
+                echo "[🔗 Open HTML Report]($LATEST_LINK)" >> $GITHUB_STEP_SUMMARY
                 
                 exit 0
               else
                 echo "❌ Test finished with conclusion: $CONCLUSION"
+                echo "### ❌ Gatling Test Failed" >> $GITHUB_STEP_SUMMARY
+                echo "ტესტი დასრულდა შეცდომით. გთხოვთ გადაამოწმოთ ლოგები." >> $GITHUB_STEP_SUMMARY
                 exit 1
               fi
             fi
@@ -87,11 +89,9 @@ jobs:
             ATTEMPT=$((ATTEMPT + 1))
           done
           
-          # თუ დრო ამოიწურა და ტესტი ისევ მიმდინარეობს (არ ჩაჭრილა)
-          echo "===================================================="
-          echo " ⏳ ტესტირება ჯერ კიდევ გრძელდება..."
-          echo " თუ შედეგს ეკრანზე ვერ ხედავთ, შესაძლებელია ტესტი ჯერ კიდევ მუშაობს."
-          echo " გადადით და შეამოწმეთ შედეგების გვერდი:"
-          echo " 👉 Reports Link: https://github.com/jscbasisbank/Test-Reports"
-          echo "===================================================="
+          # თუ დრო ამოიწურა
+          echo "### ⏳ ტესტირება ჯერ კიდევ გრძელდება..." >> $GITHUB_STEP_SUMMARY
+          echo "თუ შედეგს ეკრანზე ვერ ხედავთ, შესაძლებელია ტესტი ჯერ კიდევ მუშაობს." >> $GITHUB_STEP_SUMMARY
+          echo "[👉 გადადით რეპორტების გვერდზე](https://github.com/jscbasisbank/Test-Reports)" >> $GITHUB_STEP_SUMMARY
+          
           exit 0
