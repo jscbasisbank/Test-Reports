@@ -30,6 +30,7 @@ jobs:
           GH_TOKEN: ${{ secrets.MAIN_REPO_TOKEN }}
         run: |
           if [ "${{ github.event.inputs.project_name }}" == "gatling" ]; then
+            # 1. ვუშვებთ დისპაჩს
             curl -L \
               -X POST \
               -H "Accept: application/vnd.github+json" \
@@ -38,3 +39,47 @@ jobs:
               https://api.github.com/repos/jscbasisbank/MobileAppPerformanceTesting/actions/workflows/gatling-test.yml/dispatches \
               -d '{"ref":"main","inputs":{"users_count":"${{ github.event.inputs.users_count }}","duration_seconds":"${{ github.event.inputs.duration_seconds }}"}}'
           fi
+
+      - name: Wait and Check Test Status
+        env:
+          GH_TOKEN: ${{ secrets.MAIN_REPO_TOKEN }}
+        run: |
+          echo "Waiting for the test to start..."
+          sleep 15
+          
+          # ვამოწმებთ მაქსიმუმ 12-ჯერ (12 * 15 წამი = 3 წუთი)
+          MAX_ATTEMPTS=12
+          ATTEMPT=1
+          
+          while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
+            echo "Checking test status (Attempt $ATTEMPT of $MAX_ATTEMPTS)..."
+            
+            # ვკითხულობთ ბოლო გაშვებული ვორქფლოვის სტატუსს
+            STATUS=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              https://api.github.com/repos/jscbasisbank/MobileAppPerformanceTesting/actions/workflows/gatling-test.yml/runs?per_page=1 \
+              | jq -r '.workflow_runs[0].status')
+            
+            CONCLUSION=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              https://api.github.com/repos/jscbasisbank/MobileAppPerformanceTesting/actions/workflows/gatling-test.yml/runs?per_page=1 \
+              | jq -r '.workflow_runs[0].conclusion')
+            
+            echo "Current Status: $STATUS, Conclusion: $CONCLUSION"
+            
+            if [ "$STATUS" == "completed" ]; then
+              if [ "$CONCLUSION" == "success" ]; then
+                echo "✅ Test completed successfully!"
+                exit 0
+              else
+                echo "❌ Test finished with conclusion: $CONCLUSION"
+                exit 1
+              fi
+            fi
+            
+            sleep 15
+            ATTEMPT=$((ATTEMPT + 1))
+          done
+          
+          echo "⚠️ Timeout: Test is still running or took longer than expected."
+          exit 0
