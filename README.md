@@ -3,7 +3,7 @@
 
 > ტესტების ხელით გასაშვებად აირჩიეთ სასურველი პროექტი შესაბამისი ბმულიდან:
 > 
-> * 🚀 **[Gatling Load Tests-ის მართვა და გაშვება](https://github.com/jscbasisbank/Test-Reports/actions/workflows/trigger.yml)**
+> * 🚀 **[Gatling Load Tests-ის მართვა და გაშვება](https://github.com/jscbasisbank/Test-Reports/actions/workflows/gatling.yml)**
 ---
 
 # 📊 Gatling Test Reports
