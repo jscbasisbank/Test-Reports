@@ -64,9 +64,9 @@ jobs:
             if [ "$STATUS" == "completed" ]; then
               if [ "$CONCLUSION" == "success" ]; then
                 echo "✅ Test completed successfully!"
+                
                 sleep 5
                 
-                # ვქაჩავთ Test-Reports რეპოზიტორიის README.md-ს, სადაც ბოლო ლინკი წერია თავში
                 LATEST_LINK=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
                   https://raw.githubusercontent.com/jscbasisbank/Test-Reports/main/README.md \
                   | grep -oE "https://jscbasisbank.github.io/Test-Reports/gatling-reports/[^\)]+" | head -n 1)
@@ -87,5 +87,11 @@ jobs:
             ATTEMPT=$((ATTEMPT + 1))
           done
           
-          echo "⚠️ Timeout: Test is still running or took longer than expected."
+          # თუ დრო ამოიწურა და ტესტი ისევ მიმდინარეობს (არ ჩაჭრილა)
+          echo "===================================================="
+          echo " ⏳ ტესტირება ჯერ კიდევ გრძელდება..."
+          echo " თუ შედეგს ეკრანზე ვერ ხედავთ, შესაძლებელია ტესტი ჯერ კიდევ მუშაობს."
+          echo " გადადით და შეამოწმეთ შედეგების გვერდი:"
+          echo " 👉 Reports Link: https://github.com/jscbasisbank/Test-Reports"
+          echo "===================================================="
           exit 0
