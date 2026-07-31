@@ -37,9 +37,13 @@ jobs:
     timeout-minutes: 6
     steps:
       - name: Send API Request to Private Repo
+        id: dispatch
         env:
           GH_TOKEN: ${{ secrets.MAIN_REPO_TOKEN }}
         run: |
+          DISPATCH_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          echo "DISPATCH_TIME=$DISPATCH_TIME" >> $GITHUB_OUTPUT
+
           if [ "${{ github.event.inputs.project_name }}" == "gatling" ]; then
             curl -L \
               -X POST \
@@ -53,24 +57,57 @@ jobs:
       - name: Wait and Check Test Status & Get Report Link
         env:
           GH_TOKEN: ${{ secrets.MAIN_REPO_TOKEN }}
+          DISPATCH_TIME: ${{ steps.dispatch.outputs.DISPATCH_TIME }}
         run: |
           echo "Waiting for the test to start..."
           sleep 15
           
           MAX_ATTEMPTS=20
           ATTEMPT=1
+          TARGET_RUN_ID=""
           
+          echo "Searching for the newly triggered workflow run..."
+          
+          # 1. ჯერ ვპოულობთ ზუსტად ჩვენი გაშვების Run ID-ს (პირველი ვარიანტის უსაფრთხოება)
+          while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
+            RUN_DATA=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              https://api.github.com/repos/jscbasisbank/MobileAppPerformanceTesting/actions/workflows/gatling-test.yml/runs?per_page=5)
+            
+            TARGET_RUN_ID=$(echo "$RUN_DATA" | jq -r --arg d "$DISPATCH_TIME" '.workflow_runs[] | select(.created_at >= $d) | .id' | head -n 1)
+            
+            if [ -n "$TARGET_RUN_ID" ] && [ "$TARGET_RUN_ID" != "null" ]; then
+              echo "✅ Found Target Run ID: $TARGET_RUN_ID"
+              break
+            fi
+            
+            echo "Attempt $ATTEMPT: Test run not yet visible, waiting..."
+            sleep 10
+            ATTEMPT=$((ATTEMPT + 1))
+          done
+          
+          if [ -z "$TARGET_RUN_ID" ] || [ "$TARGET_RUN_ID" == "null" ]; then
+            echo "❌ Could not find the triggered workflow run within the time limit."
+            echo "### ❌ Gatling Test Failed" >> $GITHUB_STEP_SUMMARY
+            echo "ვორქფლოუ ვერ მოიძებნა ან API-მ დააგვიანა." >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
+          echo "✅ Target Run ID successfully located: $TARGET_RUN_ID"
+          
+          # 2. ახლა უკვე ზუსტად ვიცით ID და ვუცდით მის დასრულებას (მეორე ვარიანტის ლოგიკა)
+          ATTEMPT=1
           echo "Strict 5-minute timeout enforced ($MAX_ATTEMPTS attempts max)"
           
           while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
-            echo "Checking test status (Attempt $ATTEMPT of $MAX_ATTEMPTS)..."
+            echo "Checking test status for Run ID $TARGET_RUN_ID (Attempt $ATTEMPT of $MAX_ATTEMPTS)..."
             
-            RUN_DATA=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
+            RUN_STATUS_DATA=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
               -H "Accept: application/vnd.github+json" \
-              https://api.github.com/repos/jscbasisbank/MobileAppPerformanceTesting/actions/workflows/gatling-test.yml/runs?per_page=1)
+              https://api.github.com/repos/jscbasisbank/MobileAppPerformanceTesting/actions/runs/$TARGET_RUN_ID)
             
-            STATUS=$(echo "$RUN_DATA" | jq -r '.workflow_runs[0].status')
-            CONCLUSION=$(echo "$RUN_DATA" | jq -r '.workflow_runs[0].conclusion')
+            STATUS=$(echo "$RUN_STATUS_DATA" | jq -r '.status')
+            CONCLUSION=$(echo "$RUN_STATUS_DATA" | jq -r '.conclusion')
             
             echo "Current Status: $STATUS, Conclusion: $CONCLUSION"
             
