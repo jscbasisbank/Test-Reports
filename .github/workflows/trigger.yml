@@ -11,15 +11,25 @@ on:
         options:
           - gatling
       users_count:
-        description: 'Virtual Users count (for Gatling)'
-        required: false
+        description: 'Virtual Users count'
+        required: true
         default: '500'
-        type: string
+        type: choice
+        options:
+          - '100'
+          - '300'
+          - '500'
+          - '1000'
       duration_seconds:
-        description: 'Ramp-up duration in seconds (for Gatling)'
-        required: false
+        description: 'Ramp-up duration in seconds'
+        required: true
         default: '10'
-        type: string
+        type: choice
+        options:
+          - '5'
+          - '10'
+          - '30'
+          - '60'
 
 jobs:
   dispatch:
@@ -37,7 +47,7 @@ jobs:
               -H "Authorization: Bearer $GH_TOKEN" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
               https://api.github.com/repos/jscbasisbank/MobileAppPerformanceTesting/actions/workflows/gatling-test.yml/dispatches \
-              -d '{"ref":"main","inputs":{"users_count":"${{ github.event.inputs.users_count }}","duration_seconds":"${{ github.event.inputs.duration_seconds }}","timeout_minutes":"5"}}'
+              -d '{"ref":"main","inputs":{"users_count":"${{ github.event.inputs.users_count }}","duration_seconds":"${{ github.event.inputs.duration_seconds }}"}}'
           fi
 
       - name: Wait and Check Test Status & Get Report Link
