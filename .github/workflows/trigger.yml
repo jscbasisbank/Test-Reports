@@ -24,7 +24,7 @@ on:
 jobs:
   dispatch:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 6
     steps:
       - name: Send API Request to Private Repo
         env:
@@ -37,7 +37,7 @@ jobs:
               -H "Authorization: Bearer $GH_TOKEN" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
               https://api.github.com/repos/jscbasisbank/MobileAppPerformanceTesting/actions/workflows/gatling-test.yml/dispatches \
-              -d '{"ref":"main","inputs":{"users_count":"${{ github.event.inputs.users_count }}","duration_seconds":"${{ github.event.inputs.duration_seconds }}"}}'
+              -d '{"ref":"main","inputs":{"users_count":"${{ github.event.inputs.users_count }}","duration_seconds":"${{ github.event.inputs.duration_seconds }}","timeout_minutes":"5"}}'
           fi
 
       - name: Wait and Check Test Status & Get Report Link
@@ -47,8 +47,10 @@ jobs:
           echo "Waiting for the test to start..."
           sleep 15
           
-          MAX_ATTEMPTS=12
+          MAX_ATTEMPTS=20
           ATTEMPT=1
+          
+          echo "Strict 5-minute timeout enforced ($MAX_ATTEMPTS attempts max)"
           
           while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
             echo "Checking test status (Attempt $ATTEMPT of $MAX_ATTEMPTS)..."
@@ -72,7 +74,6 @@ jobs:
                   https://raw.githubusercontent.com/jscbasisbank/Test-Reports/main/README.md \
                   | grep -oE "https://jscbasisbank.github.io/Test-Reports/gatling-reports/[^\)]+" | head -n 1)
                 
-                # ვწერთ ლინკს GitHub Actions-ის Summary გვერდზე
                 echo "### 🚀 Gatling Test Report Generated!" >> $GITHUB_STEP_SUMMARY
                 echo "ტესტი წარმატებით დასრულდა. HTML რეპორტის სანახავად დააჭირეთ ქვემოთ მოცემულ ბმულს:" >> $GITHUB_STEP_SUMMARY
                 echo "[🔗 Open HTML Report]($LATEST_LINK)" >> $GITHUB_STEP_SUMMARY
@@ -90,9 +91,6 @@ jobs:
             ATTEMPT=$((ATTEMPT + 1))
           done
           
-          # თუ დრო ამოიწურა
-          echo "### ⏳ ტესტირება ჯერ კიდევ გრძელდება..." >> $GITHUB_STEP_SUMMARY
-          echo "თუ შედეგს ეკრანზე ვერ ხედავთ, შესაძლებელია ტესტი ჯერ კიდევ მუშაობს." >> $GITHUB_STEP_SUMMARY
-          echo "[👉 გადადით რეპორტების გვერდზე](https://github.com/jscbasisbank/Test-Reports)" >> $GITHUB_STEP_SUMMARY
-          
-          exit 0
+          echo "### ⏳ 5-წუთიანი ლიმიტი ამოიწურა!" >> $GITHUB_STEP_SUMMARY
+          echo "ტესტმა ვერ მოასწრო დასრულება" >> $GITHUB_STEP_SUMMARY
+          exit 1
