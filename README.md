@@ -22,3 +22,4 @@ Below is the complete history of executed tests (in Tbilisi time). Simply click 
 - 🚀 [Test Report (2026-07-31 00:44:33)](https://jscbasisbank.github.io/Test-Reports/gatling-reports/report-2026-07-31_00-44-33/index.html)
 - 🚀 [Test Report (2026-08-03 00:18:36)](https://jscbasisbank.github.io/Test-Reports/gatling-reports/report-2026-08-03_00-18-36/index.html)
 - 🚀 [Test Report (2026-08-04 00:29:04)](https://jscbasisbank.github.io/Test-Reports/gatling-reports/report-2026-08-04_00-29-04/index.html)
+- 🚀 [Test Report (2026-08-05 00:29:18)](https://jscbasisbank.github.io/Test-Reports/gatling-reports/report-2026-08-05_00-29-18/index.html)
