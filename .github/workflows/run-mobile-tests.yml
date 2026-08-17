@@ -11,7 +11,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Run Maven Test
+      - name: Run Maven Test with Proxy
         shell: cmd
-        run: mvn -o -Dtest=SuitTest test
+        run: |
+          mvn -Dhttp.proxyHost=cp-isa-isa.bsb.ge -Dhttp.proxyPort=8080 -Dhttps.proxyHost=cp-isa-isa.bsb.ge -Dhttps.proxyPort=8080 -Dtest=SuitTest test
         working-directory: D:\projects\NewAppTesting
