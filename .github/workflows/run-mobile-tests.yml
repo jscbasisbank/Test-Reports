@@ -1,14 +1,16 @@
-name: Run Local Mobile Tests
+name: Run Local JUnit 5 Test
 
 on:
   workflow_dispatch:
 
 jobs:
-  run-tests:
-    runs-on: [self-hosted, SOFT-26-207]
+  run-maven-test:
+    runs-on: self-hosted # იყენებს შენს SOFT-26-207 რანერს
+
     steps:
-      - name: Run Maven Test from Local Directory
-        shell: pwsh
-        run: |
-          Set-Location "D:\projects\NewAppTesting"
-          mvn test -Dtest=kotlinTests.test.SuitTest
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run Maven Test
+        run: mvn -Dtest=SuitTest test
+        working-directory: D:\projects\NewAppTesting
