@@ -13,6 +13,5 @@ jobs:
 
       - name: Run Maven Test
         shell: cmd
-        run: |
-          cmd.exe /c "mvn -Dtest=SuitTest test"
+        run: mvn -o -Dtest=SuitTest test
         working-directory: D:\projects\NewAppTesting
