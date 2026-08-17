@@ -1,16 +1,13 @@
-name: Local Mobile Suit Test
+name: Run Local Mobile Tests
 
 on:
   workflow_dispatch:
 
 jobs:
-  run-suite:
+  run-tests:
     runs-on: [self-hosted, SOFT-26-207]
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Run SuitTest via Maven
+      - name: Run Maven Test from Local Directory
         run: |
-          echo "Starting SuitTest.kt on local machine..."
+          cd D:\projects\NewAppTesting
           mvn test -Dtest=kotlinTests.test.SuitTest
