@@ -5,12 +5,14 @@ on:
 
 jobs:
   run-maven-test:
-    runs-on: self-hosted # იყენებს შენს SOFT-26-207 რანერს
+    runs-on: self-hosted
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Run Maven Test
-        run: mvn -Dtest=SuitTest test
+        shell: cmd
+        run: |
+          cmd.exe /c "mvn -Dtest=SuitTest test"
         working-directory: D:\projects\NewAppTesting
