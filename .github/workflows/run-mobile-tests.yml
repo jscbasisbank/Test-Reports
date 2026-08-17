@@ -11,8 +11,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Run Maven Test with Proxy
+      - name: Run Maven Test using Local Repository
         shell: cmd
         run: |
-          mvn -Dhttp.proxyHost=cp-isa-isa.bsb.ge -Dhttp.proxyPort=8080 -Dhttps.proxyHost=cp-isa-isa.bsb.ge -Dhttps.proxyPort=8080 -Dtest=SuitTest test
+          mvn -Dmaven.repo.local=C:\Users\lasha13\.m2\repository -Dtest=SuitTest test
         working-directory: D:\projects\NewAppTesting
