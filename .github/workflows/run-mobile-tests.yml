@@ -8,6 +8,7 @@ jobs:
     runs-on: [self-hosted, SOFT-26-207]
     steps:
       - name: Run Maven Test from Local Directory
+        shell: pwsh
         run: |
-          cd D:\projects\NewAppTesting
+          Set-Location "D:\projects\NewAppTesting"
           mvn test -Dtest=kotlinTests.test.SuitTest
