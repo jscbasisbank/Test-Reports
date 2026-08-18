@@ -14,5 +14,5 @@ jobs:
       - name: Run Maven Test using Local Repository
         shell: cmd
         run: |
-          mvn -o -Dtest=SuitTest test
+          mvn test -o -Dtest=SuitTest -Dmaven.repo.local=C:\Users\lasha13\.m2\repository
         working-directory: D:\projects\NewAppTesting
