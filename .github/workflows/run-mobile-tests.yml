@@ -14,4 +14,4 @@ jobs:
       - name: Run Maven Test
         shell: cmd
         run: |
-          start "Maven Tests" cmd /k "cd /d C:\Projects\IdeaProjects\NewAppTesting && mvn test -Dtest=SuitTest"
+              mvn test -Dtest=SuitTest
