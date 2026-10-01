@@ -11,8 +11,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Run Maven Test using Local Repository
+      - name: Run Maven Test
         shell: cmd
         run: |
-          mvn test -o -Dtest=SuitTest -Dmaven.repo.local=C:\Users\lasha13\.m2\repository
-        working-directory: C:\Projects\IdeaProjects\NewAppTesting
+          start "Maven Tests" cmd /k "cd /d C:\Projects\IdeaProjects\NewAppTesting && mvn test -Dtest=SuitTest"
