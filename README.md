@@ -23,3 +23,8 @@ Below is the complete history of executed tests (in Tbilisi time). Simply click 
 Below is the complete history of executed mobile automation tests (in Tbilisi time). Simply click on any report to open it:
 
 -  [Test Report (2026-10-02 04:01:14)](https://jscbasisbank.github.io/Test-Reports/mobile-testing-reports/report-2026-10-02_04-01-14/index.html)
+#  Mobile Automation Test Reports
+
+Below is the complete history of executed mobile automation tests (in Tbilisi time). Simply click on any report to open it:
+
+-  [Test Report (2026-10-02 04:18:56)](https://jscbasisbank.github.io/Test-Reports/mobile-testing-reports/report-2026-10-02_04-18-56/index.html)
