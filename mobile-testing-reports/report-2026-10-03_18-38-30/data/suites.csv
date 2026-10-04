@@ -1,0 +1,48 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"skipped","Sat Oct 03 18:32:03 GET 2026","Sat Oct 03 18:32:03 GET 2026","2","","kotlinTests.test.authentication.AuthenticationTests","","kotlinTests.test.authentication.AuthenticationTests","incorrectCredentialTest","incorrectCredentialTest()","🤖 Incorrect Credential
+ASSERT: Relevant alerts"
+"passed","Sat Oct 03 01:47:52 GET 2026","Sat Oct 03 01:49:34 GET 2026","101689","","kotlinTests.test.authentication.AuthenticationTests","","kotlinTests.test.authentication.AuthenticationTests","trustDeviceFromSettings","trustDeviceFromSettings()","🤖: User Trusts Device From Settings
+ASSERT: Trust device button is not turned on at first
+ASSERT: Success alert is displayed correctly
+ASSERT: User is on right page after make device trusted
+ASSERT: Button switcher is turned on in trusted devices on top of list after re-login"
+"failed","Sat Oct 03 01:51:06 GET 2026","Sat Oct 03 01:53:12 GET 2026","126215","","kotlinTests.test.authentication.AuthenticationTests","","kotlinTests.test.authentication.AuthenticationTests","easyLoginPasscodeTest","easyLoginPasscodeTest()","🤖: Create Passcode from Secure Access Bottom Sheet
+ASSERT: Backspace is working
+ASSERT: Confirm passcode alert
+ASSERT: Secure Access Bottom Sheet exists
+ASSERT: Passcode error message is presented
+ASSERT: Passcode success alert
+ASSERT: Expected page is exiting after re-login by passcode"
+"passed","Sat Oct 03 01:50:46 GET 2026","Sat Oct 03 01:51:32 GET 2026","46205","","kotlinTests.test.authentication.AuthenticationTests","","kotlinTests.test.authentication.AuthenticationTests","incorrectUsernameTest","incorrectUsernameTest()","🤖: Incorrect Username Test
+ASSERT: Relevant alerts"
+"passed","Sat Oct 03 01:52:41 GET 2026","Sat Oct 03 01:54:43 GET 2026","122191","","kotlinTests.test.authentication.AuthenticationTests","","kotlinTests.test.authentication.AuthenticationTests","loginWithRemovedPasscodeTest","loginWithRemovedPasscodeTest()","🤖: Login With Removed Passcode
+User logins with username, password and otp, creates and removes passcode, re-logins
+ASSERT Expected Page Exists On Enable And Disable a Passcode
+ASSERT: Passcode Switcher On Enable And Disable
+ASSERT: Passcode Is Removed After Re-login"
+"passed","Sat Oct 03 01:49:02 GET 2026","Sat Oct 03 01:51:11 GET 2026","128897","","kotlinTests.test.authentication.AuthenticationTests","","kotlinTests.test.authentication.AuthenticationTests","removePasscodeBySwitcher","removePasscodeBySwitcher()","🤖: Remove Passcode By Switch User
+ASSERT: Login page is presented
+ASSERT: User input field Value"
+"broken","Sat Oct 03 18:35:39 GET 2026","Sat Oct 03 18:38:17 GET 2026","157782","","kotlinTests.test.authentication.AuthenticationTests","","kotlinTests.test.authentication.AuthenticationTests","trustedDeviceTest","trustedDeviceTest()","🤖: The user authenticates with the user name, password and OTP, trusts the device from the offer page. takes trustedDeviceToken from the device logs user re-logins
+ ASSERT: actual and Expected trustedDeviceTokens is not null
+ ASSERT: equals actual and Expected trustedDeviceTokens
+ ASSERT: Home Page is exiting after re-login without otp(by trusted device)"
+"passed","Sat Oct 03 01:49:34 GET 2026","Sat Oct 03 01:50:46 GET 2026","72096","","kotlinTests.test.authentication.AuthenticationTests","","kotlinTests.test.authentication.AuthenticationTests","usernameRegexTest","usernameRegexTest()","🤖: Username Field Regex Validation
+ASSERT: Regex of Username"
+"passed","Sat Oct 03 18:32:03 GET 2026","Sat Oct 03 18:34:27 GET 2026","143295","","kotlinTests.test.authentication.AuthenticationTests","","kotlinTests.test.authentication.AuthenticationTests","removeTrustedDevice","removeTrustedDevice()","🤖: User makes device trusted and removes it again from trusted devices
+ASSERT: Alert after remove device from trusted
+ASSERT: Expected page after remove trusted device
+ASSERT: Device switcher is turned off in the trust devices list"
+"passed","Sat Oct 03 01:51:11 GET 2026","Sat Oct 03 01:52:41 GET 2026","89266","","kotlinTests.test.authentication.AuthenticationTests","","kotlinTests.test.authentication.AuthenticationTests","removePasscodeByRemoveTrustedDevice","removePasscodeByRemoveTrustedDevice()","🤖: Remove Passcode By Removing Trusted Device
+user creates passcode and removes it by removing trusted of device
+ASSERT: Alert
+ASSERT: Switcher button state"
+"passed","Sat Oct 03 01:48:33 GET 2026","Sat Oct 03 01:51:06 GET 2026","153061","","kotlinTests.test.authentication.AuthenticationTests","","kotlinTests.test.authentication.AuthenticationTests","presentEasyLoginActivationIntroTest","presentEasyLoginActivationIntroTest()","🤖: in case of not trusted device, user sees Easy Login Activation Intro, else home pageASSERT: Login Activation Intro Is Presented Before Trust DeviceASSERT: Home Page Is Presented Before After Device"
+"passed","Sat Oct 03 18:32:03 GET 2026","Sat Oct 03 18:34:18 GET 2026","134178","","kotlinTests.test.authentication.AuthenticationTests","","kotlinTests.test.authentication.AuthenticationTests","removePasscodeFromSecuritySettingsTest","removePasscodeFromSecuritySettingsTest()","🤖: Remove Passcode from Security Settings
+User creates passcode and re-loginsASSERT: Passcode switcher is turned onASSERT: Alert after remove PasscodeASSERT: Expected Page exists"
+"passed","Sat Oct 03 01:51:32 GET 2026","Sat Oct 03 01:52:41 GET 2026","69300","","kotlinTests.test.authentication.AuthenticationTests","","kotlinTests.test.authentication.AuthenticationTests","checkLoginPageScreenDetailsTest","checkLoginPageScreenDetailsTest()","🤖: User Has Opened App First Time And Is Standing On Login Page.
+ASSERT: Language Flag (First Open)
+ASSERT: Help Icon
+ASSERT: Lokalise Values
+ASSERT: Username Input Is Presented
+ASSERT: Password Input Is Presented"
