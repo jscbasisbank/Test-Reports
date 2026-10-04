@@ -1,1 +1,0 @@
-[{"uid":"ffbd78cc5791a022","name":"loginWithRemovedPasscodeTest()","time":{"start":1791145270854,"stop":1791145380338,"duration":109484},"status":"failed","severity":"normal"},{"uid":"5c75fe0ed710a220","name":"removePasscodeBySwitcher()","time":{"start":1791145270854,"stop":1791145399004,"duration":128150},"status":"passed","severity":"normal"}]

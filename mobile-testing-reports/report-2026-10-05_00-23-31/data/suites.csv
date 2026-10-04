@@ -1,9 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"failed","Mon Oct 05 00:21:10 GET 2026","Mon Oct 05 00:23:00 GET 2026","109484","","kotlinTests.test.authentication.AuthenticationTests","","kotlinTests.test.authentication.AuthenticationTests","loginWithRemovedPasscodeTest","loginWithRemovedPasscodeTest()","🤖: Login With Removed Passcode
-User logins with username, password and otp, creates and removes passcode, re-logins
-ASSERT Expected Page Exists On Enable And Disable a Passcode
-ASSERT: Passcode Switcher On Enable And Disable
-ASSERT: Passcode Is Removed After Re-login"
-"passed","Mon Oct 05 00:21:10 GET 2026","Mon Oct 05 00:23:19 GET 2026","128150","","kotlinTests.test.authentication.AuthenticationTests","","kotlinTests.test.authentication.AuthenticationTests","removePasscodeBySwitcher","removePasscodeBySwitcher()","🤖: Remove Passcode By Switch User
-ASSERT: Login page is presented
-ASSERT: User input field Value"

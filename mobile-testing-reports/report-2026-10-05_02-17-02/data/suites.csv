@@ -1,6 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"failed","Mon Oct 05 02:14:52 GET 2026","Mon Oct 05 02:16:49 GET 2026","116782","","kotlinTests.test.authentication.AuthenticationTests","","kotlinTests.test.authentication.AuthenticationTests","loginWithRemovedPasscodeTest","loginWithRemovedPasscodeTest()","🤖: Login With Removed Passcode
-User logins with username, password and otp, creates and removes passcode, re-logins
-ASSERT Expected Page Exists On Enable And Disable a Passcode
-ASSERT: Passcode Switcher On Enable And Disable
-ASSERT: Passcode Is Removed After Re-login"
