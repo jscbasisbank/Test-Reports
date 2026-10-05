@@ -1,0 +1,6 @@
+"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
+"Deposits","","List of Deposits","2","0","0","0","0"
+"","","","0","3","0","0","0"
+"Deposits","","Add Term Deposit","1","0","0","0","0"
+"Loans","","List of Loans with overdue","1","0","0","0","0"
+"Utility Payments","","After selecting a specific category, the providers will scroll to the name of the corresponding group","0","1","0","0","0"
